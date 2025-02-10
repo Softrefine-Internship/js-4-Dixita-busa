@@ -12,8 +12,65 @@ class ExpenseTracker {
   setupEventListeners() {
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
-      this.addExpense();
+      if (this.validateForm()) {
+        this.addExpense();
+      }
     });
+    const inputs = this.form.querySelectorAll("input, select");
+    inputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        const formGroup = input.closest(".form-group");
+        if (formGroup.classList.contains("error")) {
+          formGroup.classList.remove("error");
+        }
+      });
+    });
+  }
+
+  validateForm() {
+    let isValid = true;
+    const name = document.getElementById("expenseName");
+    const amount = document.getElementById("expenseAmount");
+    const date = document.getElementById("expenseDate");
+    const category = document.getElementById("expenseCategory");
+
+    // Reset previous errors
+    this.form.querySelectorAll(".form-group").forEach((group) => {
+      group.classList.remove("error");
+    });
+
+    // Validate name
+    if (!name.value.trim()) {
+      isValid = false;
+      name.closest(".form-group").classList.add("error");
+    }
+
+    // Validate amount
+    if (!amount.value || parseFloat(amount.value) <= 0) {
+      isValid = false;
+      amount.closest(".form-group").classList.add("error");
+    }
+
+    // Validate date
+    if (!date.value) {
+      isValid = false;
+      date.closest(".form-group").classList.add("error");
+    }
+
+    // Validate category
+    if (!category.value) {
+      isValid = false;
+      category.closest(".form-group").classList.add("error");
+    }
+
+    if (!isValid) {
+      this.form.classList.add("shake");
+      setTimeout(() => {
+        this.form.classList.remove("shake");
+      }, 500);
+    }
+
+    return isValid;
   }
 
   loadExpenses() {
@@ -23,6 +80,7 @@ class ExpenseTracker {
       this.updateUI();
     }
   }
+
   saveExpenses() {
     localStorage.setItem("expenses", JSON.stringify(this.expenses));
   }
@@ -73,18 +131,18 @@ class ExpenseTracker {
         const row = document.createElement("tr");
         row.className = "animate-in";
         row.innerHTML = `
-                      <td>${expense.name}</td>
-                      <td>$${this.formatAmount(expense.amount)}</td>
-                      <td>${this.formatDate(expense.date)}</td>
-                      <td><span class="badge">${expense.category}</span></td>
-                      <td>
-                          <button class="delete-btn" (${
-                            expense.id
-                          })">
-                              Delete
-                          </button>
-                      </td>
-                  `;
+                  <td>${expense.name}</td>
+                  <td>$${this.formatAmount(expense.amount)}</td>
+                  <td>${this.formatDate(expense.date)}</td>
+                  <td><span class="badge">${expense.category}</span></td>
+                  <td>
+                      <button class="delete-btn" onclick="expenseTracker.deleteExpense(${
+                        expense.id
+                      })">
+                          Delete
+                      </button>
+                  </td>
+              `;
         this.tableBody.appendChild(row);
       });
   }
