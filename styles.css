@@ -165,7 +165,7 @@ button:hover {
   border-radius: 1rem;
   box-shadow: var(--shadow);
   overflow: hidden;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 270px);
   overflow-y: auto;
 }
 
@@ -283,7 +283,7 @@ tr:hover {
   }
 
   .table-container {
-    height: 50vh;
+    height: 60vh;
   }
 
   th:nth-child(3),
@@ -338,7 +338,7 @@ tr:hover {
 
   .table-container {
     margin: 0 0rem;
-    height: 35vh;
+    height: 45vh;
     width: calc(100% + 0rem);
     border-radius: 0;
   }
@@ -377,7 +377,7 @@ tr:hover {
 
 @media (max-width: 375px) {
   .table-container {
-    height: 28vh;
+    height: 35vh;
     margin-bottom: 2rem;
   }
 
@@ -397,6 +397,17 @@ tr:hover {
   td {
     padding: 0.5rem 0.25rem;
     font-size: 0.75rem;
+  }
+  th:nth-child(1),
+  td:nth-child(1) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: 0rem;
+    padding-left: 1rem;
   }
 }
 
