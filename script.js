@@ -34,30 +34,25 @@ class ExpenseTracker {
     const date = document.getElementById("expenseDate");
     const category = document.getElementById("expenseCategory");
 
-    // Reset previous errors
     this.form.querySelectorAll(".form-group").forEach((group) => {
       group.classList.remove("error");
     });
 
-    // Validate name
     if (!name.value.trim()) {
       isValid = false;
       name.closest(".form-group").classList.add("error");
     }
 
-    // Validate amount
     if (!amount.value || parseFloat(amount.value) <= 0) {
       isValid = false;
       amount.closest(".form-group").classList.add("error");
     }
 
-    // Validate date
     if (!date.value) {
       isValid = false;
       date.closest(".form-group").classList.add("error");
     }
 
-    // Validate category
     if (!category.value) {
       isValid = false;
       category.closest(".form-group").classList.add("error");
@@ -69,7 +64,6 @@ class ExpenseTracker {
         this.form.classList.remove("shake");
       }, 500);
     }
-
     return isValid;
   }
 
