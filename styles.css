@@ -1,6 +1,5 @@
 :root {
   --primary: #387478;
-  --primary-dark: #243642;
   --gradient-start: #387478;
   --gradient-end: #629584;
   --danger: #ef4444;
@@ -26,6 +25,88 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.custom-dropdown-button {
+  width: 100%;
+  padding: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.custom-dropdown-button:after {
+  content: '';
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: white transparent transparent transparent;
+  margin-left: 0.5rem;
+}
+
+.custom-dropdown-button:focus {
+  outline: none;
+  border-color: white;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.custom-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.25rem;
+  background: var(--background);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+}
+
+.custom-dropdown.open .custom-dropdown-menu {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.custom-dropdown-option {
+  padding: 0.15rem 1rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.custom-dropdown-option:hover {
+  background-color: var(--primary);
+  color: var(--card);
+  filter: brightness(90%);
+}
+.custom-dropdown-option:focus {
+  background-color: var(--primary);
+  filter: brightness(90%);
+}
+
+.custom-dropdown-option.selected {
+  background-color: var(--primary);
+  color: var(--card);
+}
+
+.form-group.error .custom-dropdown-button {
+  border-color: var(--danger);
+  background: rgba(239, 68, 68, 0.1);
 }
 
 .app-container {
@@ -86,6 +167,10 @@ label {
   color: rgba(255, 255, 255, 0.9);
 }
 
+select {
+  appearance: none;
+}
+
 input,
 select {
   padding: 0.875rem;
@@ -110,8 +195,8 @@ select::placeholder {
 }
 
 option {
-  background: var(--primary);
-  color: white;
+  background: var(--background);
+  color: var(--text);
 }
 
 button {
@@ -127,8 +212,138 @@ button {
 }
 
 button:hover {
-  transform: translateY(-2px);
+  background: #eee;
+  color: var(--gradient-start);
   box-shadow: var(--shadow);
+}
+
+.flatpickr-calendar {
+  background: var(--background);
+  border: none;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  width: 250px; 
+  font-size: 13px;
+  padding: 0;
+}
+
+.flatpickr-months {
+  background: var(--primary);
+  color: white;
+  border-radius: 0.3rem 0.3rem 0 0;
+  padding: 0.25rem 0;
+}
+
+.flatpickr-month {
+  height: 32px;
+  color: white;
+  margin: 0;
+}
+
+.flatpickr-current-month {
+  padding: 0;
+  color: white;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+}
+
+.flatpickr-monthDropdown-months {
+  color: white;
+  height: 22px;
+  font-size: 0.95rem;
+}
+
+.flatpickr-weekdays {
+  background: var(--primary);
+  height: 20px;
+  padding: 0;
+}
+
+.flatpickr-weekday {
+  background: var(--primary);
+  color: white !important;
+  font-size: 0.8rem !important;
+  height: 24px;
+  line-height: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+.flatpickr-days {
+  padding: 0;
+  width: 250px; 
+}
+
+.dayContainer {
+  width: 250px; 
+  min-width: 250px;
+  max-width: 250px;
+  padding: 0;
+}
+
+.flatpickr-day {
+  color: var(--text);
+  border-radius: 0.25rem;
+  height: 28px;
+  line-height: 22px;
+  font-size: 0.8rem;
+  max-width: 34px;
+  width: 34px;
+}
+
+.flatpickr-day:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.flatpickr-day.selected {
+  background: var(--primary);
+  color: white;
+}
+
+.flatpickr-day.today {
+  border: 1px solid var(--primary);
+}
+
+.flatpickr-next-month,
+.flatpickr-prev-month {
+  padding: 2px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flatpickr-next-month svg,
+.flatpickr-prev-month svg {
+  fill: white;
+  width: 14px;
+  height: 14px;
+}
+
+.numInputWrapper:hover {
+  background: transparent;
+}
+
+.numInputWrapper input {
+  color: white;
+  height: 22px;
+}
+
+.flatpickr-current-month input.cur-year {
+  padding: 0 0 0 0.5ch;
+  height: 22px;
+  font-size: 0.95rem;
+}
+
+.flatpickr-rContainer,
+.flatpickr-days,
+.dayContainer {
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
 }
 
 .delete-btn {
@@ -154,10 +369,14 @@ button:hover {
 }
 
 .total-amount {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--primary);
   margin-top: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .table-container {
@@ -181,9 +400,9 @@ td {
 }
 
 th {
-  background: var(--background);
+  background: var(--primary);
   font-weight: 600;
-  color: var(--text-light);
+  color: var(--card);
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -236,6 +455,10 @@ tr:hover {
 
   .expense-form {
     margin-bottom: 1rem;
+  }
+
+  .total-amount {
+    font-size: 2rem;
   }
 }
 
@@ -348,6 +571,12 @@ tr:hover {
   }
 }
 
+@media (max-width: 640px) {
+  .total-amount {
+    font-size: 1.75rem;
+  }
+}
+
 @media (max-width: 460px) {
   th,
   td {
@@ -442,10 +671,6 @@ tr:hover {
 
 .form-group.error .error-message {
   display: block;
-}
-
-.shake {
-  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 @keyframes shake {
